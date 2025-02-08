@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income & Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('D:\Main Project\images\images3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            color: #fff;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+        }
+        h1, h2 { color: #f8d210; }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+        }
+        th { background: #ff5733; }
+        tr:nth-child(even) { background: rgba(255, 255, 255, 0.1); }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .report-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .report {
+            flex: 1;
+            text-align: left;
+        }
+        canvas {
+            flex: 1;
+            max-width: 300px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Income & Expense Tracker</h1>
+        <h2>Money Manager</h2>
+        <form id="transactionForm">
+            <select id="category">
+                <option>Transport</option><option>Health</option><option>Study</option>
+                <option>Food</option><option>Entertainment</option>
+            </select>
+            <input type="number" id="amount" placeholder="Amount" required>
+            <select id="type">
+                <option>Income</option><option>Expense</option>
+            </select>
+            <button type="submit">Add</button>
+        </form>
+
+        <div class="report-container">
+            <div class="report">
+                <h2>Income Report</h2>
+                <table id="income-table">
+                    <tr><th>Date</th><th>Category</th><th>Amount</th></tr>
+                </table>
+            </div>
+            <canvas id="incomeChart"></canvas>
+        </div>
+        
+        <div class="report-container">
+            <div class="report">
+                <h2>Expense Report</h2>
+                <table id="expense-table">
+                    <tr><th>Date</th><th>Category</th><th>Amount</th></tr>
+                </table>
+            </div>
+            <canvas id="expenseChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let incomeData = {}, expenseData = {};
+            const form = document.getElementById('transactionForm');
+            const incomeTable = document.getElementById('income-table');
+            const expenseTable = document.getElementById('expense-table');
+            const incomeChartCtx = document.getElementById('incomeChart').getContext('2d');
+            const expenseChartCtx = document.getElementById('expenseChart').getContext('2d');
+            
+            let incomeChart = new Chart(incomeChartCtx, {
+                type: 'pie',
+                data: { labels: [], datasets: [{ data: [], backgroundColor: ['#ff6384','#36a2eb','#ffcd56','#4bc0c0','#9966ff'] }] },
+                options: { 
+                    responsive: false, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } } 
+                }
+            });
+
+            let expenseChart = new Chart(expenseChartCtx, {
+                type: 'pie',
+                data: { labels: [], datasets: [{ data: [], backgroundColor: ['#ff6384','#36a2eb','#ffcd56','#4bc0c0','#9966ff'] }] },
+                options: { 
+                    responsive: false, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } } 
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let category = form.category.value;
+                let amount = parseFloat(form.amount.value);
+                let type = form.type.value;
+                let date = new Date().toLocaleDateString();
+                
+                let table = type === 'Income' ? incomeTable : expenseTable;
+                table.innerHTML += `<tr><td>${date}</td><td>${category}</td><td>${amount}</td></tr>`;
+                
+                if (type === 'Income') {
+                    incomeData[category] = (incomeData[category] || 0) + amount;
+                    updateChart(incomeChart, incomeData);
+                } else {
+                    expenseData[category] = (expenseData[category] || 0) + amount;
+                    updateChart(expenseChart, expenseData);
+                }
+                form.reset();
+            });
+            
+            function updateChart(chart, data) {
+                chart.data.labels = Object.keys(data);
+                chart.data.datasets[0].data = Object.values(data);
+                chart.update();
+            }
+        });
+    </script>
+</body>
+</html>
