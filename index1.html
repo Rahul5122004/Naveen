@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Mentor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/YOUR-FONT-AWESOME-KIT.js" crossorigin="anonymous"></script>
+   
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Personal Mentor Logo" class="logo">
+            <span class="brand-name">Personal Mentor</span>
+        </div>
+        <nav>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-slider">
+        <div class="slide" style="background-image: url('images/images4.jpg'); display: block;"></div>
+        <div class="slide" style="background-image: url('images/images3.jpg');"></div>
+        <div class="slide" style="background-image: url('images/images5.jpg');"></div>
+        <div class="hero-text">
+            <h1>Welcome To Personal Mentor Website</h1>
+            <p>Your one-stop solution for expert guidance, task management, and personal growth.</p>
+            <ul>
+                <li>Unlock your full potential with personalized mentoring</li>
+                <li>Stay organized with a comprehensive task manager</li>
+                <li>Manage your finances efficiently</li>
+                <li>Track your health and well-being</li>
+            </ul>
+            <a href="#features" class="explore-btn">Explore Features</a>
+        </div>
+    </div>
+
+    <div class="features-section" id="features">
+        <h2>Our Features ✨</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <i class="fas fa-chart-line" style="color: #e74c3c;"></i>
+                <h3>Consulting</h3>
+                <p>Get expert advice on career growth, personal development, and skill enhancement.</p>
+                <a href="consulting.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-wallet" style="color: #2ecc71;"></i>
+                <h3>Money Manager</h3>
+                <p>Track your income, expenses, and savings with an intuitive financial planner.</p>
+                <a href="money-manager.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-list-check" style="color: #f39c12;"></i>
+                <h3>To-Do List</h3>
+                <p>Stay organized with a powerful task manager to keep track of daily goals.</p>
+                <a href="to-do-list.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-weight" style="color: #3498db;"></i>
+                <h3>BMI Calculator</h3>
+                <p>Monitor your health by calculating your Body Mass Index (BMI) with ease.</p>
+                <a href="bmi-calculator.html" class="feature-btn">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="services-page" id="Services">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p><i>We provide top-notch architectural and urban planning services, ensuring innovative designs and well-planned infrastructures.</i></p>
+            
+            <div class="service-box">
+                <img src="images/images3.jpg" alt="Business Meeting">
+                <div class="service-content">
+                    <h3>Skyscrapers Buildings</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora praesentium aperiam amet repellendus suscipit ab, dolorem dignissimos reiciendis ut, adipisci culpa explicabo dolore? Laudantium, praesentium iste vel odio ab voluptas?Our team specializes in designing high-rise buildings with state-of-the-art technology and sustainable solutions to meet modern needs.</p>
+                </div>
+            </div>
+            
+            <div class="service-box" style="flex-direction: row-reverse;">
+                <img src="images/images3.jpg" alt="House Model">
+                <div class="service-content">
+                    <h3>Conceptual Architecture</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, aliquam. Id harum necessitatibus consequuntur dolor? Hic eligendi, error aut, at eaque fugit soluta ea possimus nisi, dicta mollitia similique repellendus.We bring creative ideas to life with our innovative and aesthetically pleasing architectural designs, tailored to your preferences.</p>
+                </div>
+            </div>
+    
+            <div class="service-box">
+                <img src="images/images3.jpg" alt="Modern Design">
+                <div class="service-content">
+                    <h3>Modern Design</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis exercitationem aut consequatur dolore possimus ipsum! Dolorum quisquam cum itaque, ipsa, laboriosam nihil soluta voluptatem fugiat, reprehenderit alias officiis? Nulla, sapiente?Our modern design concepts incorporate functionality, sustainability, and elegance to create stunning architectural masterpieces.</p>
+                </div>
+            </div>
+            
+            <div class="service-box" style="flex-direction: row-reverse;">
+                <img src="images/images3.jpg" alt="Urban Planning">
+                <div class="service-content">
+                    <h3>Urban Planning</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et reprehenderit itaque ducimus aut blanditiis omnis, quam provident hic laborum vel exercitationem veniam consectetur numquam incidunt ipsam explicabo. Dolorem, laboriosam sed.We provide comprehensive urban planning services to develop well-structured cities and communities that enhance quality of life.</p>
+                </div>
+            </div>
+            
+            <button class="contact-btn">Contact Us</button>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+        document.addEventListener("DOMContentLoaded", showSlides);
+    </script>
+</body>
+</html>
