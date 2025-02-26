@@ -1,116 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Mentor</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Mentor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/YOUR-FONT-AWESOME-KIT.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+   
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <h1>Personal Mentor</h1>
-      <h2>To your busy life</h2>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Personal Mentor Logo" class="logo">
+            <span class="brand-name">Personal Mentor</span>
+        </div>
+        <nav>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-slider">
+        <div class="slide" style="background-image: url('images/1.avif'); display: block;"></div>
+        <div class="slide" style="background-image: url('images/2.avif');"></div>
+        <div class="slide" style="background-image: url('images/3.avif');"></div>
+        <div class="hero-text">
+            <h1>Welcome To Personal Mentor Website</h1>
+            <p>Your one-stop solution for expert guidance, task management, and personal growth.</p>
+            <ul>
+                <li>Unlock your full potential with personalized mentoring</li>
+                <li>Stay organized with a comprehensive task manager</li>
+                <li>Manage your finances efficiently</li>
+                <li>Track your health and well-being</li>
+            </ul>
+            <a href="#features" class="explore-btn">Explore Features</a>
+        </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#guidelines">Features</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Signup</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <div class="content">
-      <h2>Welcome to our Website</h2>
-      <h1>I am Your Personal Advisor</h1>
-      <p>
-        To manage your finance,<br>
-        To achieve your goals,<br>
-        To maintain your body health.
-      </p>
-      <div class="buttons">
-        <a href="#" class="btn primary">Explore Features</a>
-        
-      </div>
+    <div class="features-section" id="features">
+        <h2>Our Features ✨</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <i class="fas fa-chart-line" style="color: #e74c3c;"></i>
+                <h3>Consulting</h3>
+                <p>Get expert advice on career growth, personal development, and skill enhancement.</p>
+                <a href="consulting.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-wallet" style="color: #2ecc71;"></i>
+                <h3>Money Manager</h3>
+                <p>Track your income, expenses, and savings with an intuitive financial planner.</p>
+                <a href="income.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-list-check" style="color: #f39c12;"></i>
+                <h3>To-Do List</h3>
+                <p>Stay organized with a powerful task manager to keep track of daily goals.</p>
+                <a href="todo.html" class="feature-btn">Learn More</a>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-weight" style="color: #3498db;"></i>
+                <h3>BMI Calculator</h3>
+                <p>Monitor your health by calculating your Body Mass Index (BMI) with ease.</p>
+                <a href="bmi.html" class="feature-btn">Learn More</a>
+            </div>
+        </div>
     </div>
-    <div class="image">
-      <img src="D:/Main Project/images/profile.jpeg" alt="Smiling woman">
+
+
+    <div class="services-page" id="Services">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p><i>We provide well Deatiled services content about Personal Mentor Features</i></p>
+            
+            <div class="service-box">
+                <img src="images/service1.avif" alt="mentoring">
+                <div class="service-content">
+                    <h3>Counsling Services - Personal Mentor</h3>
+                    <p>Our counseling service helps you understand and use our features better. Get expert advice on managing your money, tracking expenses, and saving wisely. Learn how to plan tasks effectively with our To-Do List for better productivity. Stay healthy by using our BMI Calculator to track your fitness. We guide you on making smart financial and health decisions. Our goal is to help you stay organized, healthy, and stress-free! 😊
+                   </p>
+                </div>
+            </div>
+            
+            <div class="service-box" style="flex-direction: row-reverse;">
+                <img src="images/service2.avif" alt="Money manager">
+                <div class="service-content">
+                    <h3>Money Management Service – Personal Mentor</h3>
+                    <p>
+                        Our Money Manager helps you track your finances effortlessly. Add amounts with categories like Salary, Transport, Health, Food, and more. Choose Income or Expense, set a date, and add notes for easy reference. View transactions in a clear table, with Income and Expenses shown separately. Each transaction displays a category icon for quick identification. Select a payment method like Cash, Bank Transfer, or Digital Payment for better organization. Stay in control of your spending and savings with our easy-to-use money tracking system! 💰📊💳</p>
+                </div>
+            </div>
+    
+            <div class="service-box">
+                <img src="images/service3.avif" alt="Goal setter">
+                <div class="service-content">
+                    <h3>Task Management – Personal Mentor</h3>
+                    <p>
+                        Our Task Manager helps you stay organized. You can add tasks with a title, description, and due date. Sort tasks into categories like Work, Personal, or Urgent. Mark tasks as Completed or Pending and update or delete them anytime. See all your tasks in a clear list to stay focused. Set reminders so you don’t forget important things. Manage your daily work easily and stay on track! ✅📅</p>
+                </div>
+            </div>
+            
+            <div class="service-box" style="flex-direction: row-reverse;">
+                <img src="images/service4 (1).avif" alt="BMI Calculator">
+                <div class="service-content">
+                    <h3>Body Monitoring – Personal Mentor</h3>
+                    <p>Our BMI Calculator helps you check if your weight is healthy. Just enter your height and weight, and it will quickly calculate your Body Mass Index (BMI). It tells you if you are underweight, normal, overweight, or obese. This helps you understand your fitness level. Use it to track your progress and stay healthy. Simple, fast, and easy to use! 🏋️‍♂️💪
+                      </p>
+                </div>
+            </div>
+            
+        </div>
     </div>
-  </main>
 
-  <!-- Guideline Section -->
-  <section id="guidelines" class="section">
-    <h2>Features</h2>
-    <div class="guideline-container">
-      <div class="guideline-item">
-        <div class="guideline-image">
-          <img src="D:\Main Project\images\money.jpg" alt="Finance Management">
-        </div>
-        <div class="guideline-text">
-          <a href="income.html" style="margin: 20px; text-decoration: none; color: black;">
-          <h3>Finance Management</h3>
-          <p>*Make a Budget – Plan your income and expenses.<br>
-             *Save and Invest – Keep money aside and grow it wisely.<br>
-             *Avoid Debt – Borrow only when needed and repay fast.<br>
-             *Plan Ahead – Set goals for future needs like retirement.<br>
-             *Review Regularly – Check your finances and adjust as needed.</p>
-        </div>
-      </div>
-      
-      <div class="guideline-item">
-        
-        <div class="guideline-image">
-          <img src="D:\Main Project\images\todo.jpg" alt="Goal Setter">
-        </div>
-        <div class="guideline-text">
-          <a href="todo.html" style="margin: 20px; text-decoration: none; color: black;">
-
-          <h3>Goal Setter</h3>
-          <p>Effective goal setting involves creating clear, achievable, and time-bound goals. Break down your large goals into smaller tasks, and track your progress regularly to stay on course for success.</p>
-        </div>
-      </div>
-
-      <div class="guideline-item">
-        <div class="guideline-image">
-          <img src="D:\Main Project\images\bmi.jpg" alt="Body Maintenance">
-        </div>
-        <div class="guideline-text">
-          <a href="bmi.html" style="margin: 20px; text-decoration: none; color: black;">
-          <h3>Body Maintenance</h3>
-          <p>Maintaining a healthy body requires regular exercise, balanced nutrition, and proper rest. Follow a personalized workout plan and adopt healthy eating habits to keep your body fit and energized.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="section">
-    <h2>Our Services</h2>
-    <div class="services-container">
-      <div class="service">
-        <h3>Personalized Advice</h3>
-        <p>Receive tailored advice from experts to help you with financial, health, and personal goals.</p>
-      </div>
-      <div class="service">
-        <h3>App Integration</h3>
-        <p>Effective goal setting involves creating clear, achievable, and time-bound goals. Break down your large goals into smaller tasks, and track your progress regularly to stay on course for success.</p>
-      </div>
-      </div>
-      <div class="service">
-        <h3>24/7 Support</h3>
-        <p>>Maintaining a healthy body requires regular exercise, balanced nutrition, and proper rest. Follow a personalized workout plan and adopt healthy eating habits to keep your body fit and energized.</p>
-      </div></p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Zock Educate. All rights reserved.</p>
-  </footer>
+    <script>
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+        document.addEventListener("DOMContentLoaded", showSlides);
+    </script>
 </body>
-                                                                                                                                                                                                                 </html>
+                                                                          </html>
