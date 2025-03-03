@@ -1,0 +1,710 @@
+* Services Page Styling */
+.services-page {
+    text-align: center;
+    padding: 80px 20px;
+    background: #aad1d1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.services-page h1 {
+    font-size: 42px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.services-page p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Service Box Styling */
+.service-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #0eae73;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-width: 1400px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image Styling */
+/* Reduce the width of service images */
+.service-box img {
+    width: 28%; /* Adjust as needed */
+    max-height: 280px; /* Maintain aspect ratio */
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+
+/* Adjust service content width */
+.service-content {
+    flex: 1.5; /* Increase content width */
+    text-align: left;
+    padding: 0 20px;
+}
+
+
+.service-content h3 {
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.service-content p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Hover Effects */
+.service-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-box:hover img {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .service-box {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .service-box img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .service-content {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-box {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .service-box img {
+        width: 100%; /* Full width for smaller screens */
+        max-width: 400px;
+    }
+
+    .service-content h3 {
+        font-size: 24px;
+    }
+
+    .service-content p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}<?php
+include("config.php");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">💜 Billing System</div>
+        <ul>
+            <li><a href="index.php">🏠 Home</a></li>
+            <li><a href="invoice.php">📝 Invoices</a></li>
+            <li><a href="products.php">🛒 Products</a></li>
+            <li><a href="reports.php">📊 Reports</a></li>
+            <li><a href="contact.php">📞 Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Effortless & Elegant Billing</h1>
+            <p>Manage invoices, track products, and boost your business!</p>
+            <a href="products.php" class="btn">Explore Products</a>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="products">
+        <h2>🌟 Featured Products</h2>
+        <div class="product-list">
+            <?php
+            $result = $conn->query("SELECT * FROM products");
+            while ($row = $result->fetch_assoc()) {
+                $original_price = $row['price'];
+                $discount = $row['discount'];
+                $final_price = $original_price - ($original_price * ($discount / 100));
+
+                echo "
+                    <div class='product-card'>
+                        <img src='uploads/" . $row['image'] . "' alt='" . $row['name'] . "'>
+                        <h3>" . $row['name'] . "</h3>
+                        <p>" . $row['description'] . "</p>
+                        <span class='original-price'> $" . number_format($original_price, 2) . "</span>
+                        <span class='discount'>-" . $discount . "%</span>
+                        <span class='final-price'>$" . number_format($final_price, 2) . "</span>
+                    </div>
+                ";
+            }
+            ?>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Billing Management System | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+<?php
+include("config.php");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices - Billing System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">💜 Billing System</div>
+        <ul>
+            <li><a href="index.php">🏠 Home</a></li>
+            <li><a href="invoice.php">📝 Invoices</a></li>
+            <li><a href="products.php">🛒 Products</a></li>
+            <li><a href="reports.php">📊 Reports</a></li>
+            <li><a href="contact.php">📞 Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Invoice Section -->
+    <section class="invoice-section">
+        <h2>📄 Invoices</h2>
+        
+        <!-- Search Bar -->
+        <input type="text" id="search" placeholder="🔍 Search Invoice..." onkeyup="searchInvoice()">
+
+        <div class="invoice-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="invoiceTable">
+                    <?php
+                    $result = $conn->query("SELECT * FROM invoices ORDER BY date DESC");
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                            <td>{$row['id']}</td>
+                            <td>{$row['customer_name']}</td>
+                            <td>{$row['date']}</td>
+                            <td>$" . number_format($row['total_amount'], 2) . "</td>
+                            <td><span class='status " . strtolower($row['status']) . "'>{$row['status']}</span></td>
+                            <td><a href='generate_invoice.php?id={$row['id']}' class='btn'>🖨️ Download</a></td>
+                        </tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+    function searchInvoice() {
+        let query = document.getElementById("search").value;
+        $.ajax({
+            url: "search_invoice.php",
+            method: "POST",
+            data: {query: query},
+            success: function(data) {
+                $("#invoiceTable").html(data);
+            }
+        });
+    }
+    </script>
+
+</body>
+</html>
+<?php
+include("config.php");
+
+$query = $_POST['query'];
+$sql = "SELECT * FROM invoices WHERE customer_name LIKE '%$query%' OR id LIKE '%$query%' ORDER BY date DESC";
+$result = $conn->query($sql);
+
+$output = "";
+while ($row = $result->fetch_assoc()) {
+    $output .= "<tr>
+        <td>{$row['id']}</td>
+        <td>{$row['customer_name']}</td>
+        <td>{$row['date']}</td>
+        <td>$" . number_format($row['total_amount'], 2) . "</td>
+        <td><span class='status " . strtolower($row['status']) . "'>{$row['status']}</span></td>
+        <td><a href='generate_invoice.php?id={$row['id']}' class='btn'>🖨️ Download</a></td>
+    </tr>";
+}
+
+echo $output;
+?>
+<?php
+require 'vendor/autoload.php';
+use Dompdf\Dompdf;
+
+include("config.php");
+
+$id = $_GET['id'];
+$result = $conn->query("SELECT * FROM invoices WHERE id = $id");
+$invoice = $result->fetch_assoc();
+
+$dompdf = new Dompdf();
+$html = "
+    <h2>Billing Management System</h2>
+    <h4>Invoice #{$invoice['id']}</h4>
+    <p><strong>Customer:</strong> {$invoice['customer_name']}</p>
+    <p><strong>Date:</strong> {$invoice['date']}</p>
+    <p><strong>Total Amount:</strong> $" . number_format($invoice['total_amount'], 2) . "</p>
+    <p><strong>Status:</strong> {$invoice['status']}</p>
+";
+
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream("invoice_{$id}.pdf", ["Attachment" => true]);
+?>
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "billing_system";
+
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #FF69B4, #DDA0DD); /* Bright Pink & Lavender */
+    color: #4B0082;
+}
+
+/* Navigation Bar */
+nav {
+    background: linear-gradient(45deg, #FF1493, #C71585); /* Bright Pink Gradient */
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+nav .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700; /* Gold Accent */
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 1);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 10px;
+}
+
+nav ul li a:hover {
+    background: rgba(255, 215, 0, 0.5); /* Gold Glow */
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.9);
+}
+
+/* Hero Section */
+.hero {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(255, 105, 180, 0.85), rgba(221, 160, 221, 0.9)), url('hero-image.jpg') no-repeat center center/cover;
+    color: white;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-text h1 {
+    font-size: 50px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0px 0px 12px rgba(255, 215, 0, 1);
+}
+
+.hero-text p {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: linear-gradient(45deg, #FFD700, #FF4500);
+    color: #4B0082;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: 0.3s;
+    box-shadow: 0px 6px 15px rgba(255, 165, 0, 0.7);
+}
+
+.btn:hover {
+    background: #FF1493;
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0px 8px 20px rgba(255, 165, 0, 1);
+}
+
+/* Products Section */
+.products {
+    text-align: center;
+    padding: 60px;
+    background: linear-gradient(180deg, #FF69B4, #DDA0DD); /* Bright Pink & Lavender */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.products h2 {
+    font-size: 38px;
+    color: #4B0082;
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 12px rgba(75, 0, 130, 0.7);
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.85); /* Glassmorphism */
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    width: 280px;
+    text-align: center;
+    transition: 0.3s;
+    border: 2px solid rgba(255, 20, 147, 0.7);
+}
+
+.product-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+/* Discount Styling */
+.original-price {
+    text-decoration: line-through;
+    color: red;
+    font-size: 18px;
+    display: block;
+    margin-top: 5px;
+}
+
+.discount {
+    color: #FF4500;
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+}
+
+.final-price {
+    font-size: 26px;
+    font-weight: bold;
+    color: #4B0082;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(45deg, #FF69B4, #DDA0DD);
+    color: white;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    box-shadow: 0 -8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-text p {
+        font-size: 20px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+    }
+
+    .product-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Gradient Button Animation */
+.btn {
+    background: linear-gradient(45deg, #FFD700, #FF4500);
+    color: #4B0082;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background 0.4s ease, transform 0.2s ease;
+    box-shadow: 0px 6px 15px rgba(255, 165, 0, 0.7);
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #FF4500, #FFD700);
+    transform: scale(1.1);
+    box-shadow: 0px 8px 20px rgba(255, 165, 0, 1);
+}
+
+/* Parallax Scrolling Effect */
+.hero {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('hero-image.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* Enables parallax */
+    color: white;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Floating Call-to-Action Button */
+.floating-cta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #FF1493, #FF69B4);
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0px 6px 12px rgba(255, 20, 147, 0.7);
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.floating-cta:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 8px 15px rgba(255, 20, 147, 1);
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffe6f2;
+    color: #333;
+}
+
+/* Navigation */
+nav {
+    background: linear-gradient(90deg, #ff66b2, #800080);
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Invoice Section */
+.invoice-section {
+    text-align: center;
+    padding: 20px;
+}
+
+.invoice-section h2 {
+    color: #800080;
+}
+
+/* Search Bar */
+#search {
+    width: 50%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    border: 2px solid #800080;
+    border-radius: 5px;
+}
+
+/* Table Styles */
+.invoice-container {
+    width: 90%;
+    margin: auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #800080;
+}
+
+th {
+    background: #ff66b2;
+    color: white;
+}
+
+/* Status Labels */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.status.paid {
+    background: green;
+}
+
+.status.pending {
+    background: red;
+}
+
+/* Button */
+.btn {
+    padding: 8px 15px;
+    background: purple;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #search {
+        width: 80%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
