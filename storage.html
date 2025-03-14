@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Storage</title>
+    <style>
+      /* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('images/3.avif') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* Folder Section */
+.folders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.folder {
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.folder:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #5e63d2, #a5a8f9);
+}
+
+.folder img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.folder span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Upload Section */
+.upload-section {
+    display: none;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.upload-section input[type="file"] {
+    padding: 8px;
+    border-radius: 6px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.upload-section button {
+    margin-left: 10px;
+}
+
+/* File List */
+.file-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.file-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    transform: scale(1.05);
+}
+
+.file-item img,
+.file-item video {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #28a745, #32cd77);
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #218838, #28a745);
+}
+
+/* Context Menu */
+.context-menu {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 8px;
+    display: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.context-menu ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.context-menu ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Fullscreen Viewer */
+.fullscreen-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.fullscreen-view img,
+.fullscreen-view video {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: red;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    background: darkred;
+}
+
+/* Footer */
+.extra-info {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.extra-info a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.extra-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .folder {
+        width: 130px;
+        height: 130px;
+    }
+
+    .file-item img,
+    .file-item video {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Secure Storage</h1>
+        <button onclick="createNewFolder()">+ New Folder</button>
+        <div class="folders" id="foldersContainer"></div>
+
+        <div class="upload-section" id="uploadSection">
+            <h2 id="folderName"></h2>
+            <input type="file" id="fileInput" multiple>
+            <button onclick="uploadFile()">Upload</button>
+            <div class="file-list" id="fileList"></div>
+        </div>
+
+        <div class="extra-info">
+            <p>Thank you for helping us improve our service!</p>
+            <p><a href="index.html">Return to Home</a></p>
+          </div>
+
+        <!-- Fullscreen Image/Video Viewer -->
+        <div class="fullscreen-view" id="fullscreenView">
+            <span class="close-btn" onclick="closeFullscreen()">Close</span>
+            <img id="fullscreenImg" style="display: none;">
+            <video id="fullscreenVideo" controls style="display: none;"></video>
+        </div>
+    </div>
+
+    <script>
+
+function goBack() {
+    document.getElementById("uploadSection").style.display = "none";
+    currentFolder = "";
+    document.getElementById("folderName").innerText = "No Folder Selected";
+}
+
+       let storageData = JSON.parse(localStorage.getItem("storageData")) || {};
+let currentFolder = "";
+
+function createNewFolder() {
+    let folderName = prompt("Enter folder name:");
+    if (folderName && !storageData[folderName]) {
+        storageData[folderName] = [];
+        localStorage.setItem("storageData", JSON.stringify(storageData));
+        displayFolders();
+    } else {
+        alert("Folder already exists or invalid name.");
+    }
+}
+
+function displayFolders() {
+    let foldersContainer = document.getElementById("foldersContainer");
+    foldersContainer.innerHTML = "";
+    Object.keys(storageData).forEach(folder => {
+        let div = document.createElement("div");
+        div.className = "folder";
+        div.onclick = () => toggleFolder(folder);
+        div.oncontextmenu = (event) => showContextMenu(event, div, "folder", folder);
+
+        let img = document.createElement("img");
+        img.src = "icons/folder.png";
+        img.alt = folder;
+        div.appendChild(img);
+
+        let span = document.createElement("span");
+        span.innerText = folder;
+        div.appendChild(span);
+
+        foldersContainer.appendChild(div);
+    });
+}
+
+function toggleFolder(folderName) {
+    currentFolder = folderName;
+    document.getElementById("folderName").innerText = folderName + " Folder";
+    document.getElementById("uploadSection").style.display = "block";
+    document.getElementById("fileInput").value = "";
+    updateFileList();
+}
+
+function uploadFile() {
+    let fileInput = document.getElementById("fileInput");
+    let files = fileInput.files;
+
+    if (files.length > 0) {
+        for (let file of files) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                storageData[currentFolder].push({ name: file.name, url: event.target.result, type: file.type });
+                localStorage.setItem("storageData", JSON.stringify(storageData));
+                updateFileList();
+            };
+            reader.readAsDataURL(file);
+        }
+        fileInput.value = "";
+    }
+}
+
+function updateFileList() {
+    let fileList = document.getElementById("fileList");
+    fileList.innerHTML = "";
+    storageData[currentFolder].forEach(file => {
+        let div = document.createElement("div");
+        div.className = "file-item";
+        div.innerHTML = `<img src="${file.url}" onclick="viewFile('${file.url}')">`;
+        div.oncontextmenu = (event) => showContextMenu(event, div, "file", file);
+        fileList.appendChild(div);
+    });
+}
+
+function viewFile(url) {
+    document.getElementById("fullscreenView").style.display = "flex";
+    document.getElementById("fullscreenImg").src = url;
+    document.getElementById("fullscreenImg").style.display = "block";
+}
+
+function closeFullscreen() {
+    document.getElementById("fullscreenView").style.display = "none";
+}
+
+// Context Menu Functionality
+document.addEventListener("DOMContentLoaded", function () {
+    const contextMenu = document.createElement("div");
+    contextMenu.className = "context-menu";
+    contextMenu.innerHTML = `
+        <ul>
+            <li onclick="openItem()">Open</li>
+            <li onclick="renameItem()">Rename</li>
+            <li onclick="deleteItem()">Delete</li>
+        </ul>
+    `;
+    document.body.appendChild(contextMenu);
+
+    let targetElement = null;
+    let targetType = "";
+    let targetName = "";
+
+    document.addEventListener("click", function () {
+        contextMenu.style.display = "none";
+    });
+
+    window.showContextMenu = function (event, element, type, name) {
+        event.preventDefault();
+        targetElement = element;
+        targetType = type;
+        targetName = name;
+        contextMenu.style.top = `${event.pageY}px`;
+        contextMenu.style.left = `${event.pageX}px`;
+        contextMenu.style.display = "block";
+    };
+
+    window.openItem = function () {
+        if (targetType === "folder") {
+            toggleFolder(targetName);
+        } else if (targetType === "file") {
+            viewFile(targetName.url);
+        }
+    };
+
+    window.renameItem = function () {
+        let newName = prompt("Enter new name:");
+        if (newName && targetElement) {
+            if (targetType === "folder") {
+                if (storageData[newName]) {
+                    alert("Folder name already exists!");
+                } else {
+                    storageData[newName] = storageData[targetName];
+                    delete storageData[targetName];
+                    localStorage.setItem("storageData", JSON.stringify(storageData));
+                    displayFolders();
+                }
+            } else if (targetType === "file") {
+                let fileIndex = storageData[currentFolder].findIndex(file => file.url === targetName.url);
+                if (fileIndex !== -1) {
+                    storageData[currentFolder][fileIndex].name = newName;
+                    localStorage.setItem("storageData", JSON.stringify(storageData));
+                    updateFileList();
+                }
+            }
+        }
+    };
+
+    window.deleteItem = function () {
+        if (targetElement) {
+            if (targetType === "folder") {
+                delete storageData[targetName];
+                localStorage.setItem("storageData", JSON.stringify(storageData));
+                displayFolders();
+            } else if (targetType === "file") {
+                storageData[currentFolder] = storageData[currentFolder].filter(file => file.url !== targetName.url);
+                localStorage.setItem("storageData", JSON.stringify(storageData));
+                updateFileList();
+            }
+        }
+    };
+});
+
+displayFolders();
+
+    </script>
+</body>
+</html>
