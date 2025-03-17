@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Mentor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/YOUR-FONT-AWESOME-KIT.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- AOS Animation Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+ </head>
+
+<header>
+  <div class="logo-container">
+      <img src="images/s.jpeg" alt="Logo" class="logo">
+      <h1>Personal Mentor</h1>
+  </div>
+  <nav>
+      <ul id="nav-menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#features">features</a></li>
+          <li><a href="#services">service</a></li>
+          <li><a href="#feedback">feedback</a></li>
+          <li><a href="signin.html">signin</a></li>
+          <li><a href="signup.html">Signup</a></li>
+      </ul>
+  </nav>
+  <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+  </div>
+</header>
+
+<div class="slider-container">
+  <div class="slider">
+      <div class="slide"><img src="images/slide1.jpg" alt="Slide 1"></div>
+      <div class="slide"><img src="images/slide2.avif" alt="Slide 2"></div>
+      <div class="slide"><img src="images/slide3.jpg" alt="Slide 3"></div>
+      <div class="slide"><img src="images/slide4.avif" alt="Slide 3"></div>
+      <div class="slide"><img src="images/slide5.avif" alt="Slide 3"></div>
+      <div class="slide"><img src="images/slide6.webp" alt="Slide 3"></div>
+  </div>
+  <div class="prev" onclick="moveSlide(-1)">&#10094;</div>
+  <div class="next" onclick="moveSlide(1)">&#10095;</div>
+</div>
+
+<!----------------------------- Features Section Start -------------------------------------->
+<div class="features-section" id="features">
+  <h2 data-aos="fade-up">Our Features ✨</h2>
+  <div class="features-container">
+    
+    <div class="feature-box" data-aos="zoom-in">
+      <i class="fas fa-wallet" style="color: #2ecc71;"></i>
+      <h3>Money Manager</h3>
+      <p>Track your income, expenses, and savings with an intuitive financial planner.</p>
+      <a href="income.html" class="feature-btn">Learn More</a>
+    </div>
+
+    <div class="feature-box" data-aos="zoom-in" data-aos-delay="100">
+      <i class="fas fa-list-check" style="color: #f39c12;"></i>
+      <h3>To-Do List</h3>
+      <p>Stay organized with a powerful task manager and keep track of daily goals.</p>
+      <a href="todo.html" class="feature-btn">Learn More</a>
+    </div>
+
+    <div class="feature-box" data-aos="zoom-in" data-aos-delay="200">
+      <i class="fas fa-weight" style="color: #3498db;"></i>
+      <h3>BMI Calculator</h3>
+      <p>Monitor your health by calculating your Body Mass Index (BMI) and stay fit.</p>
+      <a href="bmi.html" class="feature-btn">Learn More</a>
+    </div>
+
+    <div class="feature-box" data-aos="zoom-in" data-aos-delay="300">
+      <i class="fas fa-chart-line" style="color: #e74c3c;"></i>
+      <h3>Calculator</h3>
+      <p>The Hidden Storage Calculator is a secure tool for regular calculations and storage.</p>
+      <a href="Simple calculator.html" class="feature-btn">Learn More</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!----------------------------- Services Section Start -------------------------------------->
+
+<div class="services-page" id="Services">
+  <div class="container">
+      <h1>Our Services</h1>
+      <p><i>We provide well Deatiled services content about Personal Mentor Features</i></p>
+      
+      <div class="service-box" style="flex-direction: row-reverse;">
+          <img src="images/service1.avif" alt="Money manager">
+          <div class="service-content">
+              <h3>Money Management Service – Personal Mentor</h3>
+              <p>
+                  Our Money Manager helps you track your finances effortlessly. Add amounts with categories like Salary, Transport, Health, Food, and more. Choose Income or Expense, set a date, and add notes for easy reference. View transactions in a clear table, with Income and Expenses shown separately. Each transaction displays a category icon for quick identification. Select a payment method like Cash, Bank Transfer, or Digital Payment for better organization. Stay in control of your spending and savings with our easy-to-use money tracking system! 💰📊💳</p>
+          </div>
+      </div>
+
+      <div class="service-box">
+          <img src="images/service2.avif" alt="Goal setter">
+          <div class="service-content">
+              <h3>Task Management – Personal Mentor</h3>
+              <p>
+                  Our Task Manager helps you stay organized. You can add tasks with a title, description, and due date. Sort tasks into categories like Work, Personal, or Urgent. Mark tasks as Completed or Pending and update or delete them anytime. See all your tasks in a clear list to stay focused. Set reminders so you don’t forget important things. Manage your daily work easily and stay on track! ✅📅</p>
+          </div>
+      </div>
+      
+      <div class="service-box" style="flex-direction: row-reverse;">
+          <img src="images/service4.jpg" alt="BMI Calculator">
+          <div class="service-content">
+              <h3>Body Monitoring – Personal Mentor</h3>
+              <p>Our BMI Calculator helps you check if your weight is healthy. Just enter your height and weight, and it will quickly calculate your Body Mass Index (BMI). It tells you if you are underweight, normal, overweight, or obese. This helps you understand your fitness level. Use it to track your progress and stay healthy. Simple, fast, and easy to use! 🏋️‍♂️💪
+                </p>
+          </div>
+      </div>
+      <div class="service-box">
+            <img src="images/service5.jpg" alt="Calculator">
+            <div class="service-content">
+                <h3>Hidden Storage Calculator - Personal Mentor</h3>
+                <p>The Hidden Storage Calculator looks like a normal calculator but secretly stores photos, videos, and documents. It provides a safe space to keep personal files hidden. Users can create folders, upload files, and manage them easily. A right-click menu allows opening, renaming, and deleting folders. The design keeps files private while making access simple. It’s a smart and secure way to store important data!
+               </p>
+            </div>
+        </div>
+      </div>
+</div>
+<!----------------------------- Feedback Section Start -------------------------------------->
+<section class="feedback-section">
+  <h2 class="feedback-heading">We Value Your Feedback</h2>
+  <div class="feedback-container">
+    
+    <!-- Feedback Form -->
+    <div class="feedback-form">
+      <h3>Share Your Experience</h3>
+      
+      <form action="submit_feedback.php" method="POST">
+        
+        <!-- Star Rating (Now Above Name Field) -->
+        <div class="star-rating">
+          <input type="radio" name="rating" value="5" id="star5"><label for="star5">&#9733;</label>
+          <input type="radio" name="rating" value="4" id="star4"><label for="star4">&#9733;</label>
+          <input type="radio" name="rating" value="3" id="star3"><label for="star3">&#9733;</label>
+          <input type="radio" name="rating" value="2" id="star2"><label for="star2">&#9733;</label>
+          <input type="radio" name="rating" value="1" id="star1"><label for="star1">&#9733;</label>
+        </div>
+
+        <!-- Name Input -->
+        <div class="input-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        
+        <!-- Email Input -->
+        <div class="input-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        
+        <!-- Feedback Input -->
+        <div class="input-group">
+          <textarea name="feedback" rows="5" placeholder="Your Feedback" required></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Submit Feedback</button>
+      </form>
+    </div>
+    
+  </div>
+</section>
+
+<!----------------------------- Footer Section Start -------------------------------------->
+
+<footer class="site-footer">
+<div class="footer-container">
+<div class="footer-column about">
+  <h3>About Personal Mentor</h3>
+  <p>
+    Personal Mentor is your trusted guide to unlock your full potential. We provide expert advice, career growth strategies, and personal development insights for a better future.
+  </p>
+</div>
+<div class="footer-column social">
+  <h3>Connect With Us</h3>
+  <div class="social-icons">
+    <a href="#" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" target="_blank" class="social-btn"><i class="fab fa-twitter"></i></a>
+    <a href="#" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+    <a href="#" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</div>
+</div>
+<div class="footer-bottom">
+<h3>&copy; 2025 Personal Mentor. Designed By Naveen S.</h3>
+</div>
+</footer>
+
+<!----------------------------- Footer Section End -------------------------------------->
+
+<!----------------------------- JS Section Start -------------------------------------->
+
+<script>
+  function toggleMenu() {
+      const menu = document.getElementById("nav-menu");
+      menu.classList.toggle("show");
+  }
+
+
+  let slideIndex = 0;
+
+  function showSlides() {
+      const slides = document.querySelectorAll(".slide");
+      slides.forEach((slide, i) => {
+          slide.style.transform = `translateX(${-slideIndex * 100}%)`;
+      });
+  }
+
+  function moveSlide(n) {
+      const slides = document.querySelectorAll(".slide");
+      slideIndex = (slideIndex + n + slides.length) % slides.length;
+      showSlides();
+  }
+
+  function autoSlide() {
+      moveSlide(1);
+      setTimeout(autoSlide, 3000); // Change every 3 seconds
+  }
+
+  autoSlide(); // Start slider
+
+ 
+// Initialize AOS
+AOS.init({
+  duration: 1000,  // Animation duration (in ms)
+  easing: 'ease-in-out',  // Smooth easing effect
+  once: true,  // Animation happens once
+});
+
+
+</script>
+<!----------------------------- JS Section End -------------------------------------->
+
+</body>
+</html>

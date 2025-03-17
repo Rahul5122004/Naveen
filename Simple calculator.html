@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Themed Calculator</title>
+    <style>
+        * { margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; }
+        body {
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center; 
+            height: 100vh; 
+            background: black;
+            font-family: Arial, sans-serif; 
+            overflow: hidden;
+        }
+        .top-bar {
+            width: 100%; 
+            height: 50px; 
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0px 0px 10px cyan;
+             display: flex;
+            align-items: center;
+             justify-content: center;
+            font-size: 1.5em; 
+            color: cyan; 
+            position: relative;
+            cursor: pointer;
+        }
+        .hidden-buttons {
+            display: none;
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%);
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .change-password, .theme-toggle {
+            padding: 8px 12px; 
+            font-size: 1em; 
+            background: cyan;
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            color: black;
+        }
+        .calculator-container {
+            display: flex; 
+            flex-wrap: wrap;
+            align-items: center; 
+            justify-content: center;
+            gap: 20px; 
+            margin-top: 20px; 
+            width: 100%; 
+            max-width: 900px;
+        }
+        .calculator {
+            background: rgba(0, 0, 0, 0.8); 
+            padding: 20px; 
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px cyan; 
+            width: 360px; 
+            text-align: center;
+        }
+        .display {
+            width: 100%; 
+            height: 70px; 
+            text-align: right;
+            font-size: 2em; 
+            padding: 15px; 
+            border: none;
+            border-radius: 10px; 
+            background: #222; 
+            color: cyan;
+        }
+        .buttons {
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px; 
+            margin-top: 15px;
+        }
+        button {
+            padding: 18px; 
+            font-size: 1.5em; 
+            border: none;
+            border-radius: 10px; 
+            cursor: pointer;
+            background: #333; 
+            color: cyan; 
+            box-shadow: 0px 0px 10px cyan;
+        }
+        .equal { grid-column: span 2; background: cyan; color: black; }
+    </style>
+</head>
+<body>
+    <div class="top-bar" onclick="toggleButtons()">
+        <div class="hidden-buttons">
+            <button class="change-password" onclick="changeSecretCode(event)">Change Secret Code</button>
+            <button class="theme-toggle" onclick="changeTheme(event)">Change Theme</button>
+        </div>
+        AI-Themed Calculator
+    </div>
+    <div class="calculator-container">
+        <div class="calculator">
+            <input type="text" class="display" id="display" disabled>
+            <div class="buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="appendValue('/')">/</button>
+                <button onclick="appendValue('*')">*</button>
+                <button onclick="deleteLast()">←</button>
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button onclick="appendValue('-')">-</button>
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button onclick="appendValue('+')">+</button>
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button class="equal" onclick="calculate()">=</button>
+                <button onclick="appendValue('0')">0</button>
+                <button onclick="appendValue('.')">.</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let secretCode = localStorage.getItem('secretCode') || "1234";
+
+        function appendValue(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function deleteLast() {
+            let display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            let display = document.getElementById("display");
+            if (display.value === secretCode) {
+                window.location.href = "storage.html";
+            } else {
+                try {
+                    let result = eval(display.value);
+                    display.value = result;
+                } catch {
+                    display.value = "Error";
+                }
+            }
+        }
+
+        function changeSecretCode(event) {
+            event.stopPropagation();
+            let newCode = prompt("Enter new secret code:");
+            if (newCode) {
+                secretCode = newCode;
+                localStorage.setItem('secretCode', newCode);
+                alert("Secret code changed successfully!");
+            }
+        }
+
+        function changeTheme(event) {
+            event.stopPropagation();
+            const colors = ["cyan", "red", "blue", "green"];
+            let currentColor = colors[Math.floor(Math.random() * colors.length)];
+            document.querySelector(".top-bar").style.boxShadow = `0px 0px 10px ${currentColor}`;
+            document.querySelector(".calculator").style.boxShadow = `0px 0px 15px ${currentColor}`;
+            document.querySelectorAll("button").forEach(btn => btn.style.boxShadow = `0px 0px 10px ${currentColor}`);
+        }
+
+        function toggleButtons() {
+            const buttons = document.querySelector(".hidden-buttons");
+            buttons.style.display = buttons.style.display === "flex" ? "none" : "flex";
+        }
+    </script>
+</body>
+</html>
